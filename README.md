@@ -10,6 +10,12 @@ This project has not recieved a security audit and vulnerabilities will exist. D
 
 ## Setup
 
+Requirements:
+
+- A non-Windows computer (send a pull request if you require Windows support)
+- A server (VPS, Raspberry Pi, supercomputer, etc) that you can SSH into with a password (passwordless auth is on my TODO list)
+- Python 2.7
+
 ```
 git clone https://github.com/nmalcolm/Blaze
 cd Blaze
