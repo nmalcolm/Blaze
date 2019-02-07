@@ -7,7 +7,7 @@ from paramiko import SSHClient, SSHException, AuthenticationException, BadAuthen
 import paramiko
 from scp import SCPClient
 from termcolor import colored
-import tempfile
+from tempfile import mkstemp
 import yaml
 
 try:
@@ -125,9 +125,12 @@ except nacl.exceptions.CryptoError:
     print(colored("Error: Unable to encrypt file!", "red"))
     os._exit(0)
 
-encrypted_file = open(tempfile.gettempdir() + "/blaze_e_" + encrypted_filename.encode("hex"), "w")
+fd, temp_path = mkstemp()
+
+encrypted_file = open(temp_path, "w")
 encrypted_file.write(encrypted) 
 encrypted_file.close()
+os.close(fd)
 
 print(colored("Successfully encrypted! Uploading...", "green"))
 
@@ -147,11 +150,11 @@ except AuthenticationException:
 # SCPCLient takes a paramiko transport as an argument
 scp = SCPClient(ssh.get_transport())
 
-scp.put(tempfile.gettempdir() + "/blaze_e_" + encrypted_filename.encode("hex"), remote_path=cfg["ssh"]["directory"] + '/' + encrypted_filename.encode("hex"))
+scp.put(temp_path, remote_path=cfg["ssh"]["directory"] + '/' + encrypted_filename.encode("hex"))
 
 scp.close()
 
 # Remove the temporary file from disk
-os.remove(tempfile.gettempdir() + "/blaze_e_" + encrypted_filename.encode("hex"))
+os.remove(temp_path)
 
 print(colored("Done! Hash: " + encrypted_filename.encode("hex"), "green"))

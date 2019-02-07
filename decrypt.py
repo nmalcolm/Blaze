@@ -7,7 +7,7 @@ from paramiko import SSHClient, SSHException, AuthenticationException, BadAuthen
 import paramiko
 from scp import SCPClient, SCPException
 from termcolor import colored
-import tempfile
+from tempfile import mkstemp
 import yaml
 import pipes
 import time
@@ -119,8 +119,9 @@ scp = SCPClient(ssh.get_transport())
 print(colored("Downloading file...", "green"))
 
 # Download the encrypted file and save it to disk
+fd, temp_path = mkstemp()
 try:
-    scp.get(cfg["ssh"]["directory"] + "/" + options.hash, tempfile.gettempdir() + "/blaze_d_" + options.hash)
+    scp.get(cfg["ssh"]["directory"] + "/" + options.hash, temp_path)
 except SCPException, e:
     print(colored("Error: " + str(e), "red"))
     os._exit(0)
@@ -129,9 +130,10 @@ scp.close()
 
 print(colored("Reading file...", "green"))
 
-encrypted_file = open(tempfile.gettempdir() + "/blaze_d_" + options.hash, "r")
+encrypted_file = open(temp_path, "r")
 encrypted = encrypted_file.read()
 encrypted_file.close()
+os.close(fd)
 
 print(colored("Decrypting file...", "green"))
 
@@ -182,6 +184,6 @@ if options.delete:
         ssh.close()
 
 # Remove the temporary file from disk
-os.remove(tempfile.gettempdir() + "/blaze_d_" + options.hash)
+os.remove(temp_path)
 
 print(colored("We're all done here!", "green"))
