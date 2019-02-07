@@ -1,0 +1,12 @@
+# Local directory paths -- optional
+directories:
+  downloads: "" # Directory where downloaded files are saved to. Defaults to ~/Blaze
+  keys: "" # Directory where public and private keys are stored. Defaults to ~/.blaze
+
+# SSH server details -- required
+ssh:
+  hostname: "127.0.0.1" # The SSH hostname or IP address
+  port: 22 # The SSH port
+  username: "root" # The username to login with
+  password: "hunter2" # The password of the user
+  directory: "/root/BlazeBackup" # The directory on the server where encrypted files are stored
