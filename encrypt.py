@@ -4,6 +4,7 @@ from os.path import expanduser
 from nacl.public import PrivateKey, Box
 from optparse import OptionParser
 from paramiko import SSHClient, SSHException, AuthenticationException, BadAuthenticationType
+import paramiko
 from scp import SCPClient
 from termcolor import colored
 import tempfile
@@ -132,6 +133,7 @@ print(colored("Successfully encrypted! Uploading...", "green"))
 
 ssh = SSHClient()
 ssh.load_system_host_keys()
+ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
 
 try:
     ssh.connect(**ssh_info)
