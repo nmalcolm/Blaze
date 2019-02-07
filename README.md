@@ -6,6 +6,8 @@ Blaze is a tool for encrypting files and storing them on a remote server. Curren
 
 Blaze uses the Python library `PyNaCl` which is a binding to libsodium. All encryption and decryption is done on your machine. File names are encrypted too. Bear in mind the encrypted file will only be 40 bytes larger in size than the original file.
 
+This project has not recieved a security audit and vulnerabilities will exist. Do not use this project as a single backup solution. I am not responsible for data loss.
+
 ## Setup
 
 ```
