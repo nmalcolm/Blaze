@@ -21,7 +21,7 @@ $ git clone https://github.com/nmalcolm/Blaze
 $ cd Blaze
 $ pip install -r requirements.txt
 $ mv config.yml.example config.yml
-$ nano config.yml # Add your SSH details
+$ gnano config.yml # Add your SSH details
 ```
 
 ## Usage
@@ -68,6 +68,20 @@ Saving to /Users/nathan/Blaze/bankdetails.txt
 We're all done here!
 ```
 
-## Future Features
+Download and decrypt a file from the remote server, and then remove it from the server:
+
+```
+$ python decrypt.py -d -H 39d2a4ba24c201f67f595af14570939de63b22b561633f0fb3856106223c384ef68edda00cd509834d386722e010b90c900db471314ac0
+Downloading file...
+Reading file...
+Decrypting file...
+Decrypted 'bankdetails.txt'
+Saving to /Users/nathan/Blaze/bankdetails.txt
+Deleting file from server...
+We're all done here!
+```
+
+## Future Feature Ideas
 
 - Support for encrypting multiple files at once, including directories
+- Compression
