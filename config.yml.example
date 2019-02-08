@@ -18,5 +18,5 @@ ssh:
 #  hostname: "127.0.0.1" # The SSH hostname or IP address
 #  port: 22 # The SSH port
 #  username: "root" # The username to login with
-#  private_key: "hunter2" # The location of the SSH private key
+#  private_key: "/Users/nathan/.ssh/id_rsa" # The location of the SSH private key
 #  directory: "/root/BlazeBackup" # The directory on the server where encrypted files are stored
