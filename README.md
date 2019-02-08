@@ -13,7 +13,7 @@ This project has not recieved a security audit and vulnerabilities will exist. D
 Requirements:
 
 - A non-Windows computer (send a pull request if you require Windows support)
-- A server (VPS, Raspberry Pi, supercomputer, etc) that you can SSH into with a password (passwordless auth is on my TODO list)
+- A server (VPS, Raspberry Pi, supercomputer, etc) that you can SSH into
 - Python 2.7
 
 ```
@@ -71,4 +71,3 @@ We're all done here!
 ## Future Features
 
 - Support for encrypting multiple files at once, including directories
-- Support for passwordless auth

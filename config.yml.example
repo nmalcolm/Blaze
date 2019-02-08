@@ -5,8 +5,18 @@ directories:
 
 # SSH server details -- required
 ssh:
+  auth: "password" # Which type of authentication to use (password or private_key)
   hostname: "127.0.0.1" # The SSH hostname or IP address
   port: 22 # The SSH port
   username: "root" # The username to login with
   password: "hunter2" # The password of the user
   directory: "/root/BlazeBackup" # The directory on the server where encrypted files are stored
+
+## Example of how to use public key authentication
+#ssh:
+#  auth: "private_key" # Which type of authentication to use (password or private_key)
+#  hostname: "127.0.0.1" # The SSH hostname or IP address
+#  port: 22 # The SSH port
+#  username: "root" # The username to login with
+#  private_key: "hunter2" # The location of the SSH private key
+#  directory: "/root/BlazeBackup" # The directory on the server where encrypted files are stored

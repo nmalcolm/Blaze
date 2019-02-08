@@ -23,14 +23,48 @@ except IOError:
     print(colored("Error: Failed to open config.yml. Please refer to README.md for help.", "red"))
     os._exit(0)
 
-ssh_info = {
-    'hostname': cfg['ssh']['hostname'],
-    'port': cfg['ssh']['port'],
-    'username': cfg['ssh']['username'],
-    'password': cfg['ssh']['password'],
-    'allow_agent': False,
-    'look_for_keys': False
-}
+auth = "password"
+if "auth" in cfg['ssh']:
+    auth = cfg['ssh']['auth']
+
+if auth == "private_key":
+    if not "private_key" in cfg['ssh']:
+        print(colored("Error: No SSH private key specified in config.yml", "red"))
+        os._exit(0)
+
+    try:
+        ssh_private_key = open(cfg['ssh']['private_key'], "r")
+    except IOError:
+        print(colored("Error: Failed to open SSH private key.", "red"))
+        os._exit(0)
+
+    if ssh_private_key.readline() == "-----BEGIN OPENSSH PRIVATE KEY-----\n":
+        print(colored("Error: Paramiko does not yet support this private key format. See: https://github.com/paramiko/paramiko/pull/1343", "red"))
+        os._exit(0)
+
+    pkey = paramiko.RSAKey.from_private_key_file(cfg['ssh']['private_key'])
+
+    ssh_info = {
+        'hostname': cfg['ssh']['hostname'],
+        'port': cfg['ssh']['port'],
+        'username': cfg['ssh']['username'],
+        'pkey': pkey,
+        'allow_agent': False,
+        'look_for_keys': False
+    }
+else:
+    if not "password" in cfg['ssh']:
+        print(colored("Error: No SSH password specified in config.yml", "red"))
+        os._exit(0)
+
+    ssh_info = {
+        'hostname': cfg['ssh']['hostname'],
+        'port': cfg['ssh']['port'],
+        'username': cfg['ssh']['username'],
+        'password': cfg['ssh']['password'],
+        'allow_agent': False,
+        'look_for_keys': False
+    }
 
 # Setup the options parser
 parser = OptionParser()
