@@ -17,11 +17,11 @@ Requirements:
 - Python 2.7
 
 ```
-git clone https://github.com/nmalcolm/Blaze
-cd Blaze
-pip install -r requirements.txt
-mv config.yml.example config.yml
-nano config.yml # Add your SSH details
+$ git clone https://github.com/nmalcolm/Blaze
+$ cd Blaze
+$ pip install -r requirements.txt
+$ mv config.yml.example config.yml
+$ nano config.yml # Add your SSH details
 ```
 
 ## Usage
