@@ -1,6 +1,6 @@
 # Blaze
 
-Blaze is a tool for encrypting files and storing them on a remote server. Currently only SSH is supported but other data stores and transport procotols may be introduced in the future.
+Blaze is a tool for encrypting files and storing them on a remote server. Currently only SSH is supported but other data stores and transport protocols may be introduced in the future.
 
 ## Security
 
