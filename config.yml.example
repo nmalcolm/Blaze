@@ -11,6 +11,7 @@ ssh:
   username: "root" # The username to login with
   password: "hunter2" # The password of the user
   directory: "/root/BlazeBackup" # The directory on the server where encrypted files are stored
+  timeout: 600 # The SSH timeout in seconds (600 = 10 minutes)
 
 ## Example of how to use public key authentication
 #ssh:
@@ -20,3 +21,4 @@ ssh:
 #  username: "root" # The username to login with
 #  private_key: "~/.ssh/id_rsa" # The location of the SSH private key
 #  directory: "/root/BlazeBackup" # The directory on the server where encrypted files are stored
+#  timeout: 600 # The SSH timeout in seconds (600 = 10 minutes)

@@ -5,7 +5,6 @@ from nacl.public import PrivateKey, Box
 from optparse import OptionParser
 from paramiko import SSHClient, SSHException, AuthenticationException, BadAuthenticationType
 import paramiko
-from scp import SCPClient
 from termcolor import colored
 import yaml
 

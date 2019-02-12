@@ -19,6 +19,10 @@ except IOError:
     print(colored("Error: Failed to open config.yml. Please refer to README.md for help.", "red"))
     os._exit(0)
 
+timeout = 600
+if "timeout" in cfg['ssh']:
+    timeout = cfg['ssh']['timeout']
+
 auth = "password"
 if "auth" in cfg['ssh']:
     auth = cfg['ssh']['auth']
@@ -146,7 +150,7 @@ except AuthenticationException:
     os._exit(0)
 
 # SCPCLient takes a paramiko transport as an argument
-scp = SCPClient(ssh.get_transport())
+scp = SCPClient(ssh.get_transport(), socket_timeout=timeout)
 
 print(colored("Downloading file...", "green"))
 
