@@ -28,17 +28,15 @@ if auth == "private_key":
         print(colored("Error: No SSH private key specified in config.yml", "red"))
         os._exit(0)
 
+    private_key_path = expanduser(cfg['ssh']['private_key'])
+
     try:
-        ssh_private_key = open(cfg['ssh']['private_key'], "r")
+        ssh_private_key = open(private_key_path, "r")
     except IOError:
         print(colored("Error: Failed to open SSH private key.", "red"))
         os._exit(0)
 
-    if ssh_private_key.readline() == "-----BEGIN OPENSSH PRIVATE KEY-----\n":
-        print(colored("Error: Paramiko does not yet support this private key format. See: https://github.com/paramiko/paramiko/pull/1343", "red"))
-        os._exit(0)
-
-    pkey = paramiko.RSAKey.from_private_key_file(cfg['ssh']['private_key'])
+    pkey = paramiko.RSAKey.from_private_key_file(private_key_path)
 
     ssh_info = {
         'hostname': cfg['ssh']['hostname'],
