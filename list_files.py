@@ -149,12 +149,14 @@ sftp.chdir(cfg["ssh"]["directory"])
 
 print("Listing encrypted files and decrypting their filenames...")
 
+total_size = 0
 for i in sftp.listdir():
     lstatout = str(sftp.lstat(i)).split()[0]
     if 'd' not in lstatout:
         # Remove 40 bytes from the size count (the encrypted blob will always be 40 bytes
         # longer than the original data)
         size = int(str(sftp.lstat(i)).split()[4]) - 40
+        total_size = total_size + size
 
         try:
             decoded_filename = i.decode("hex")
@@ -170,4 +172,4 @@ for i in sftp.listdir():
 
         print(colored("File: " + filename + " (" + sizeof_fmt(size) + "), Hash: " + i, "green"))
 
-print(colored("We're all done here!", "green"))
+print(colored("Total Size: " + sizeof_fmt(total_size), "green"))
